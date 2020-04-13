@@ -104,9 +104,6 @@ jobs:
 
       - name: build
         run: npm run build
-      
-      - name: Upload to tools.integem.com
-        run: npm run upload
 
       - name: get package version
         id: package
@@ -132,6 +129,7 @@ jobs:
           git clone $git_cache cache
           cd cache
           echo "::set-output name=upload_url::$(cat $github_sha.txt)"
+
       - name: Upload Release
         uses: Ireoo/upload-release@v1
         env:
@@ -141,3 +139,6 @@ jobs:
           dir: build
           exts: '["exe", "dmg", "zip", "appimage", "deb", "rpm", "apk", "msi", "pkg", "appx"]'
           suffix: ''
+
+      - name: Upload to tools.integem.com
+        run: npm run upload
